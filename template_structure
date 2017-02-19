@@ -1,0 +1,23 @@
+# Secondary Predictor Project - Template Structure
+# Author - Javier Lanillos
+# Date - 2017 - 02 - 18
+
+# Create main directory
+
+mkdir PredProj
+cd PredProj
+
+# Create primary folders
+
+	#raw data
+mkdir data
+	#main script and functions
+mkdir bin
+mkdir bin/main_script
+mkdir bin/functions
+	#results
+mkdir results
+	#reports
+mkdir reports
+
+
