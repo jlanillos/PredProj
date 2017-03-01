@@ -1,20 +1,16 @@
 #Create dictionaries for aminoacid names
-def dictionaries
-import numpy as np
+def dictionaries():
 
-aa2vector = {}
-ref_list_aa = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'O', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
-zero_vector = np.zeros(len(ref_list_aa))
+	import numpy as np
 
+	aa_dict = {'A': 1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7, 'I':8, 'K':9, 'L':10, 'M':11, 'N':12, 'P':13, 'Q':14, 'R':15, 'S':16, 'T':17, 'V':18, 'W':19, 'X':20, 'Y':21}	
 
-	for i in range(0:len(ref_list_aa)):
-		aux_vector = zero_vector
-		aux_vector[i] = 1
-		aa2vector[ref_list_aa[i]] = aux_vector
+	feature_dict = {}
+	feature_dict['b'] = 1
+	feature_dict['e'] = 0
 
+	return aa_dict, feature_dict
 
-feature_dict = {}
-feature_dict['b'] = 1
-feature_dict['e'] = -1
+# First, I made a search of the present aminoacids in all my sequences at the dataset in order to create the dictionary above:
+# {'A', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'N', 'P', 'Q', 'R', 'T', 'V', 'W', 'Y'}
 
-	return aa2vector feature_dict

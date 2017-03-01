@@ -1,5 +1,5 @@
 # EXTRACT THE FEATURE
-
+# working with filename = '~/PredProj/data/datasets/buried-exposed.3line.txt'
 #Read FASTA file (database) and return separatedly as lists the ids, the sequence and feature
 def read_fasta(filename):
 	f = open(filename,'r')
