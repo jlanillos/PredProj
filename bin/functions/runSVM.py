@@ -9,16 +9,13 @@ filename = os.path.join(data_path,dataset_file)
 title_list, seq_list, feature_list = read_fasta(filename)
 
 
-
-
-
-
 # Dictionaries to use them and code aminoacids into vectors. Outputs: aa2vector feature_dict(Name of the function: dictionaries). No inputs required
 
 aa2vector, feature_dict = dictionaries()
 # Arrange data as input for sklearn
 
 
+prot2vect(seq_list, feature_list)
 
 # Create random datasets for cross-validation
 
