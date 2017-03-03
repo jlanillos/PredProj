@@ -10,23 +10,44 @@ data_path = os.path.join(main_path, 'data','datasets')
 dataset_file = 'buried-exposed.3line.txt'
 bin_path = os.path.join(main_path, 'bin')
 
+save_file = os.path.join(main_path, 'results','parametricAnal_ws_kern_cv_20170303.txt')
+
 # PARAMETERS
 
 #add prefiltering or others
 
-ws = 7 #window size of the vectors
-kern = 'rbf' #Choose the kernel function for SVM
-cv = 5 #number of training datasets (plus the test dataset) for cross-validation
+ws_range = [7,11,15,19,23,27,31] #window size of the vectors
+kern_range = ['poly', 'rbf', 'sigmoid']#['linear', 'poly', 'rbf', 'sigmoid'] #Choose the kernel function for SVM
+cv_range = [3,5,7,9] #number of training datasets (plus the test dataset) for cross-validation
 
 
 # RUN SUPPORT VECTOR MACHINE ANALYSIS
 path2functions = os.path.join(bin_path,'functions')
 os.chdir(path2functions)
-print(path2functions)
-
+import datetime
 import runSVM
 
-scores = fSVM.runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv)
 
-print(scores)
-print('The average score is:' + str(sum(scores)/cv))
+for kern in kern_range:
+	for ws in ws_range:
+		for cv in cv_range:
+
+			now = datetime.datetime.now()
+			print ('Current date and time using str method of datetime object: ')
+			print (str(now))
+			print('Kernel ' + kern + ' ' + 'window size '+ str(ws) + ' ' + 'training sets ' + str(cv))
+
+			f = open(save_file,'a+')
+			f.write('Current date and time using str method of datetime object: ' + str(now) + '\n')
+			f.write('Kernel ' + kern + ' ' + 'window size '+ str(ws) + ' ' + 'training sets ' + str(cv)+'\n')
+
+			scores = fSVM.runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv)
+
+
+			f.write('Score ' + str(scores) +'\n')
+
+			print(scores)
+			print('The average score is:' + str(sum(scores)/cv))
+
+			f.write('Average score ' + str(sum(scores)/cv) +'\n')
+			f.close()
