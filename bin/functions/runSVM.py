@@ -2,11 +2,11 @@
 import os
 import numpy as np
 from sklearn.svm import LinearSVC
-from sklearn import svm
+from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score
 import math
 
-def runSVM(main_path,data_path,bin_path,dataset_file,ws,kernel,cv):
+def runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv):
 	# Read FASTA
 	
 	filename = os.path.join(data_path,dataset_file)
@@ -23,15 +23,21 @@ def runSVM(main_path,data_path,bin_path,dataset_file,ws,kernel,cv):
 
 	# Create training and test datasets and perform cross-validation
 
-	#c is the number of sets are created for the cross validation.
+	#cv is the number of sets are created for the cross validation.
+
 	#class sklearn.svm.SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
 
-	#print(wordscode)
-	#print('###############################')
-	#print(featurescode)
-	clf = svm.LinearSVC(C=1)
+	clf = SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
+	#clf = svm.LinearSVC(C=1)
 	clf.fit(wordscode, featurescode)
-	scores = cross_val_score(clf, wordscode, featurescode, cv = 5)
+	if cv == 3:
+		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
+	if cv == 5:
+		scores = cross_val_score(clf, wordscode, featurescode, cv = 5)
+	if cv == 7:
+		scores = cross_val_score(clf, wordscode, featurescode, cv = 7)
+	if cv == 9:
+		scores = cross_val_score(clf, wordscode, featurescode, cv = 9)
 	#print(scores)
 	#print('The mean score after cross-validation is: ', sum(scores)/cv)
 ###################################3
