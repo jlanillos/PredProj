@@ -3,13 +3,12 @@
 # Script that runs every step necessary to perform SVM and SVM itself
 
 
-def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv):
+def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,cv):
 	# Read FASTA
 	
 	#import os
 	import datetime
-	from sklearn.svm import LinearSVC
-	from sklearn.svm import SVC
+	from sklearn.ensemble import RandomForestClassifier
 	from sklearn.model_selection import cross_val_score
 	import math
 	from sklearn.metrics import confusion_matrix
@@ -36,16 +35,14 @@ def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv
 
 	#cv is the number of sets are created for the cross validation.
 
-	#class sklearn.svm.SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
-
-	#clf = SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
 
 #RUNNING SVM
 
 	X = wordscode
 	y = featurescode
 
-	clf = LinearSVC(C=1)
+	clf = RandomForestClassifier(n_estimators = cv)
+
 	clf.fit(X, y)
 	y_pred = clf.predict(X)
 
@@ -53,18 +50,18 @@ def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv
 #X_train, X_test, y_train, y_test = train_test_split(X, structvectorlist, test_size=0.20, random_state=42)els=labels).ravel()
 
 
-	if cv == 3:
-		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
-	if cv == 5:
-		scores = cross_val_score(clf, wordscode, featurescode, cv = 5)
-	if cv == 7:
-		scores = cross_val_score(clf, wordscode, featurescode, cv = 7)
-	if cv == 9:
-		scores = cross_val_score(clf, wordscode, featurescode, cv = 9)
+#	if cv == 3:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
+#	if cv == 5:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 5)
+#	if cv == 7:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 7)
+#	if cv == 9:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 9)
 	#print(scores)
 	#print('The mean score after cross-validation is: ', sum(scores)/cv)
 ###################################
-	return scores,y,y_pred
+	return y,y_pred
 
 
 	# This function takes the list of proteins as an input and translates it into its code for sklearn

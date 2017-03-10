@@ -3,7 +3,7 @@
 # Script that runs every step necessary to perform SVM and SVM itself
 
 
-def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv):
+def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv,C):
 	# Read FASTA
 	
 	#import os
@@ -45,26 +45,38 @@ def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv
 	X = wordscode
 	y = featurescode
 
-	clf = LinearSVC(C=1)
-	clf.fit(X, y)
-	y_pred = clf.predict(X)
+	#clf = LinearSVC(C=1)
+
+	if kern == 'poly':
+		clf = SVC(C=C, kernel=kern, degree=2, gamma= 1.0, coef0=1.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight='balanced', verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
+	
+		clf.fit(X, y)
+		y_pred = clf.predict(X)
+
+	elif kern == 'rbf':
+
+		clf = SVC(C=C, kernel=kern, degree=3, gamma=0.1, coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight='balanced', verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
+
+	
+		clf.fit(X, y)
+		y_pred = clf.predict(X)
 
 
 #X_train, X_test, y_train, y_test = train_test_split(X, structvectorlist, test_size=0.20, random_state=42)els=labels).ravel()
 
 
-	if cv == 3:
-		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
-	if cv == 5:
-		scores = cross_val_score(clf, wordscode, featurescode, cv = 5)
-	if cv == 7:
-		scores = cross_val_score(clf, wordscode, featurescode, cv = 7)
-	if cv == 9:
-		scores = cross_val_score(clf, wordscode, featurescode, cv = 9)
+#	if cv == 3:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
+#	if cv == 5:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 5)
+#	if cv == 7:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 7)
+#	if cv == 9:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 9)
 	#print(scores)
 	#print('The mean score after cross-validation is: ', sum(scores)/cv)
 ###################################
-	return scores,y,y_pred
+	return y,y_pred
 
 
 	# This function takes the list of proteins as an input and translates it into its code for sklearn

@@ -15,7 +15,7 @@ def runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv):
 
 	# Dictionaries to use them and code aminoacids into vectors. Outputs: aa2vector feature_dict(Name of the function: dictionaries). No inputs required
 	path2functions = os.path.join(bin_path,'functions')
-	aa_dict, feature_dict, aa2vect_dictionary = dictionaries()
+	#aa_dict, feature_dict, aa2vect_dictionary = dictionaries()
 
 	# Arrange data as input for sklearn
 
