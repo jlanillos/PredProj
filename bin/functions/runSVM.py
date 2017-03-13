@@ -6,7 +6,9 @@ from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score
 import math
 
-def runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv):
+import pickle	
+
+def runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv,C,save_model_path):
 	# Read FASTA
 	
 	filename = os.path.join(data_path,dataset_file)
@@ -20,16 +22,24 @@ def runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv):
 	# Arrange data as input for sklearn
 
 	wordscode, featurescode = prot2vect(seq_list, feature_list, ws)
-
+	X = wordscode
+	y = featurescode
 	# Create training and test datasets and perform cross-validation
 
 	#cv is the number of sets are created for the cross validation.
 
 	#class sklearn.svm.SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
 
-	clf = SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
+	clf = SVC(C=C, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
 	#clf = svm.LinearSVC(C=1)
-	clf.fit(wordscode, featurescode)
+	clf.fit(X, y)
+	
+	save_model_filename = kern+'_'+str(ws)+'_'+str(C)+'_'+str(cv)+'.sav'
+	pickle.dump(clf, open(filename, 'wb'))
+
+
+	y_pred = clf.predict(X)
+
 	if cv == 3:
 		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
 	if cv == 5:
@@ -41,7 +51,7 @@ def runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv):
 	#print(scores)
 	#print('The mean score after cross-validation is: ', sum(scores)/cv)
 ###################################3
-	return scores
+	return scores,y,y_pred
 	# Built SVM model
 
 

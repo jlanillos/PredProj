@@ -2,8 +2,7 @@
 
 # Script that runs every step necessary to perform SVM and SVM itself
 
-
-def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv,C):
+def runSVM(main_path,data_path,bin_path,dataset_file,data_50proteins,pssm_data_folder,pssm_data_folder_50new,ws,kern,cv,C):
 	# Read FASTA
 	
 	#import os
@@ -28,30 +27,31 @@ def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv
 	#aa_dict, feature_dict, aa2vect_dictionary = dictionaries_psiblast()
 
 	# Arrange data as input for sklearn
-
+	
 	wordscode, featurescode = prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder)
 
-
-	# Create training and test datasets and perform cross-validation
-
-	#cv is the number of sets are created for the cross validation.
-
-	#class sklearn.svm.SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
-
-	#clf = SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
 
 #RUNNING SVM
 
 	X = wordscode
 	y = featurescode
+	del wordscode
+	del featurescode
 
-	#clf = LinearSVC(C=1)
+	# The input for prediction now is coming from the 50 new proteins (X_50prot)
+
+	filename = data_path + '/' + data_50proteins
+	title_list, seq_list, feature_list = read_fasta(filename)
+	wordscode, featurescode = prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder_50new)
+	X_50prot = wordscode
+	y_50prot = featurescode
+	
 
 	if kern == 'poly':
 		clf = SVC(C=C, kernel=kern, degree=2, gamma= 1.0, coef0=1.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight='balanced', verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
 	
 		clf.fit(X, y)
-		y_pred = clf.predict(X)
+		y_pred = clf.predict(X_50prot)
 
 	elif kern == 'rbf':
 
@@ -59,14 +59,15 @@ def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv
 
 	
 		clf.fit(X, y)
-		y_pred = clf.predict(X)
+		y_pred = clf.predict(X_50prot)
 
 	elif kern == 'linear':
 
-		clf = LinearSVC(C=C)
+		clf = LinearSVC(C=1)
 
 		clf.fit(X, y)
-		y_pred = clf.predict(X)
+		y_pred = clf.predict(X_50prot)
+
 
 
 #X_train, X_test, y_train, y_test = train_test_split(X, structvectorlist, test_size=0.20, random_state=42)els=labels).ravel()
@@ -83,7 +84,7 @@ def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,kern,cv
 	#print(scores)
 	#print('The mean score after cross-validation is: ', sum(scores)/cv)
 ###################################
-	return y,y_pred
+	return y_50prot,y_pred
 
 
 	# This function takes the list of proteins as an input and translates it into its code for sklearn
@@ -220,12 +221,11 @@ def read_fasta(filename):
 	for i in content:
 		if '>' in i:
 			title_list.append(i[1:])
-		if i.isupper():
+		if i.isupper() and not '>' in i:
 			seq_list.append(i)
 		if i.islower() and '>' not in i:
 			feature_list.append(i)
-			
-			
+
 	f.close()
 	return title_list, seq_list, feature_list
 

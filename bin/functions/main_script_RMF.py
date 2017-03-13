@@ -24,7 +24,7 @@ bin_path = os.path.join(main_path, 'bin')
 
 
 
-save_file = os.path.join(main_path, 'results','CACARFM_20170310.txt')
+save_file = os.path.join(main_path, 'results','RFM_param_ws_20170312.txt')
 functions_path = os.path.join(main_path, 'bin','functions')
 
 
@@ -32,9 +32,9 @@ functions_path = os.path.join(main_path, 'bin','functions')
 
 #PARAMETERS
 
-ws = 15 #window size of the vectors (fixed to 15 as I decided it)
+ws_range = [7,11,19,23,27,31] #window size of the vectors 
 kern_range = ['poly'] #['linear', 'poly', 'rbf', 'sigmoid'] #Choose the kernel function for SVM
-n_estimators = [101]#[3,5,7,9] #number of training datasets (plus the test dataset) for cross-validation FIXED ON 7 AS DECIDED
+n_estimators = [3,5,7,9,101] #number of training datasets (plus the test dataset) for cross-validation FIXED ON 7 AS DECIDED
 
 
 
@@ -46,22 +46,22 @@ path2functions = os.path.join(bin_path,'functions')
 os.chdir(path2functions)
 
 
+for ws in ws_range:
+	for cv in n_estimators:		
 
-for cv in n_estimators:		
-
-	now = datetime.datetime.now()
-	print ('Current date and time using str method of datetime object: ')
-	print (str(now))
-	print('window size '+ str(ws) + ' ' + 'n_estimators ' + str(cv))
-	f = open(save_file,'a+')
-	f.write('Current date and time using str method of datetime object: ' + str(now) + '\n')
-	f.write('window size '+ str(ws) + ' ' + 'n_estimators ' + str(cv) +'\n')
-	y,y_pred = RFC.runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,cv)
+		now = datetime.datetime.now()
+		print ('Current date and time using str method of datetime object: ')
+		print (str(now))
+		print('window size '+ str(ws) + ' ' + 'n_estimators ' + str(cv))
+		f = open(save_file,'a+')
+		f.write('Current date and time using str method of datetime object: ' + str(now) + '\n')
+		f.write('window size '+ str(ws) + ' ' + 'n_estimators ' + str(cv) +'\n')
+		y,y_pred = RFC.runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,cv)
 
 
-	#Confusion matrix: tn, fp, fn, tp
-	labels=[0, 1]
-	f.write(np.array_str(confusion_matrix(y, y_pred, labels = labels).ravel()))
-	print(np.array_str(confusion_matrix(y, y_pred, labels = labels).ravel()))
-	#print(classification_report(y,y_pred, labels=labels))
-	f.close()
+		#Confusion matrix: tn, fp, fn, tp
+		labels=[0, 1]
+		f.write(np.array_str(confusion_matrix(y, y_pred, labels = labels).ravel()))
+		print(np.array_str(confusion_matrix(y, y_pred, labels = labels).ravel()))
+		#print(classification_report(y,y_pred, labels=labels))
+		f.close()
