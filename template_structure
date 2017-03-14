@@ -13,7 +13,6 @@ cd PredProj
 mkdir data
 	#main script and functions
 mkdir bin
-mkdir bin/main_script
 mkdir bin/functions
 	#results
 mkdir results
