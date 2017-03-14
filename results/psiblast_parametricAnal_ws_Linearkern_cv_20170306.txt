@@ -1,0 +1,149 @@
+Current date and time using str method of datetime object: 2017-03-08 13:26:13.608544
+Kernel linear window size 7 training sets 3
+Score [ 0.74970125  0.74730403  0.75034145]
+Average score 0.749115574906
+[35656 12162 14142 43475]Current date and time using str method of datetime object: 2017-03-08 13:26:34.310163
+Kernel linear window size 7 training sets 5
+Score [ 0.75075873  0.74890933  0.74605207  0.74992886  0.74992886]
+Average score 0.749115570633
+[35656 12162 14142 43475]Current date and time using str method of datetime object: 2017-03-08 13:27:07.514923
+Kernel linear window size 7 training sets 7
+Score [ 0.74427405  0.75521179  0.75069712  0.74843978  0.7448546   0.74943567
+  0.75328642]
+Average score 0.749457060587
+[35656 12162 14142 43475]Current date and time using str method of datetime object: 2017-03-08 13:27:53.436277
+Kernel linear window size 7 training sets 9
+Score [ 0.74393991  0.75544174  0.75134443  0.75134443  0.74818609  0.74093043
+  0.7503201   0.74878361  0.75123784]
+Average score 0.749058730952
+[35656 12162 14142 43475]Current date and time using str method of datetime object: 2017-03-08 13:28:52.445347
+Kernel linear window size 11 training sets 3
+Score [ 0.75445285  0.75043392  0.75443888]
+Average score 0.753108550159
+[35833 11985 13806 43811]Current date and time using str method of datetime object: 2017-03-08 13:29:28.031865
+Kernel linear window size 11 training sets 5
+Score [ 0.75564302  0.75270296  0.74875516  0.75538272  0.75500332]
+Average score 0.753497434818
+[35833 11985 13806 43811]Current date and time using str method of datetime object: 2017-03-08 13:30:29.566052
+Kernel linear window size 11 training sets 7
+Score [ 0.75097922  0.75780109  0.75182579  0.75129465  0.74923649  0.75308724
+  0.75746913]
+Average score 0.753099085881
+[35833 11985 13806 43811]Current date and time using str method of datetime object: 2017-03-08 13:31:50.310926
+Kernel linear window size 11 training sets 9
+Score [ 0.75307272  0.75902689  0.75322236  0.75518566  0.74861289  0.74579599
+  0.75253948  0.75620999  0.75576234]
+Average score 0.753269812582
+[35833 11985 13806 43811]Current date and time using str method of datetime object: 2017-03-08 13:33:33.698932
+Kernel linear window size 15 training sets 3
+Score [ 0.75422523  0.75060464  0.75318689]
+Average score 0.752672252683
+[35727 12091 13659 43958]Current date and time using str method of datetime object: 2017-03-08 13:34:30.640335
+Kernel linear window size 15 training sets 5
+Score [ 0.75493171  0.75194423  0.75046237  0.75566727  0.75372285]
+Average score 0.75334568705
+[35727 12091 13659 43958]Current date and time using str method of datetime object: 2017-03-08 13:36:07.908458
+Kernel linear window size 15 training sets 7
+Score [ 0.74858926  0.75846501  0.75156022  0.75189218  0.74936927  0.75175939
+  0.75726995]
+Average score 0.752700755077
+[35727 12091 13659 43958]Current date and time using str method of datetime object: 2017-03-08 13:38:11.798377
+Kernel linear window size 15 training sets 9
+Score [ 0.75051212  0.75885617  0.75356381  0.75373453  0.74955186  0.74810073
+  0.75168587  0.75305164  0.75396961]
+Average score 0.752558481126
+[35727 12091 13659 43958]Current date and time using str method of datetime object: 2017-03-08 13:40:58.872870
+Kernel linear window size 19 training sets 3
+Score [ 0.75362772  0.7511168   0.75358525]
+Average score 0.75277659181
+[35678 12140 13557 44060]Current date and time using str method of datetime object: 2017-03-08 13:42:23.734791
+Kernel linear window size 19 training sets 5
+Score [ 0.7527978   0.75346168  0.75036753  0.75557242  0.75623637]
+Average score 0.753687158432
+[35678 12140 13557 44060]Current date and time using str method of datetime object: 2017-03-08 13:44:45.725111
+Kernel linear window size 19 training sets 7
+Score [ 0.74812454  0.75753552  0.75474705  0.75149383  0.74923649  0.75315363
+  0.76005843]
+Average score 0.753478497216
+[35678 12140 13557 44060]Current date and time using str method of datetime object: 2017-03-08 13:47:44.471760
+Kernel linear window size 19 training sets 9
+Score [ 0.74914647  0.75697823  0.75766112  0.7551003   0.74818609  0.74921041
+  0.75339309  0.75416133  0.75738433]
+Average score 0.753469040052
+[35678 12140 13557 44060]Current date and time using str method of datetime object: 2017-03-08 13:52:20.360349
+Kernel linear window size 23 training sets 3
+Score [ 0.75382689  0.75074691  0.75281698]
+Average score 0.752463593589
+[35676 12142 13483 44134]Current date and time using str method of datetime object: 2017-03-08 13:53:56.778779
+Kernel linear window size 23 training sets 5
+Score [ 0.75270296  0.7535091   0.75088917  0.75538272  0.75405482]
+Average score 0.753307755731
+[35675 12143 13483 44134]Current date and time using str method of datetime object: 2017-03-08 13:56:58.432929
+Kernel linear window size 23 training sets 7
+Score [ 0.74666401  0.75746913  0.75541097  0.75189218  0.74790864  0.75527818
+  0.75826583]
+Average score 0.753269849726
+[35676 12142 13483 44134]Current date and time using str method of datetime object: 2017-03-08 14:01:08.347726
+Kernel linear window size 23 training sets 9
+Score [ 0.74897576  0.75680751  0.75620999  0.75484422  0.75014938  0.7494665
+  0.75057618  0.75390525  0.75670138]
+Average score 0.753070685499
+[35675 12143 13483 44134]Current date and time using str method of datetime object: 2017-03-08 14:07:03.534331
+Kernel linear window size 27 training sets 3
+Score [ 0.75476583  0.75105989  0.75301616]
+Average score 0.752947296916
+[35667 12151 13368 44249]Current date and time using str method of datetime object: 2017-03-08 14:09:31.178068
+Kernel linear window size 27 training sets 5
+Score [ 0.75464719  0.75246586  0.75027268  0.75405482  0.75424452]
+Average score 0.753137015093
+[35667 12151 13368 44249]Current date and time using str method of datetime object: 2017-03-08 14:13:11.785888
+Kernel linear window size 27 training sets 7
+Score [ 0.74819093  0.75826583  0.7542823   0.75136104  0.74770947  0.75381755
+  0.75813305]
+Average score 0.753108596933
+[35667 12151 13368 44249]Current date and time using str method of datetime object: 2017-03-08 14:17:51.537871
+Kernel linear window size 27 training sets 9
+Score [ 0.74982929  0.75774648  0.75527102  0.7546735   0.7494665   0.74938114
+  0.75160051  0.75279556  0.75695749]
+Average score 0.75308016435
+[35667 12151 13368 44249]Current date and time using str method of datetime object: 2017-03-08 14:25:34.968122
+Kernel linear window size 31 training sets 3
+Score [ 0.75533489  0.75023474  0.7536137 ]
+Average score 0.753061111384
+[35714 12104 13368 44249]Current date and time using str method of datetime object: 2017-03-08 14:29:06.295911
+Kernel linear window size 31 training sets 5
+Score [ 0.75374621  0.75355653  0.74970361  0.75301148  0.7545765 ]
+Average score 0.752918862666
+[35714 12104 13367 44250]Current date and time using str method of datetime object: 2017-03-08 14:34:05.061580
+Kernel linear window size 31 training sets 7
+Score [ 0.74812454  0.75733634  0.75534458  0.75122826  0.74837339  0.75282167
+  0.75906254]
+Average score 0.753184474415
+[35714 12104 13368 44249]Current date and time using str method of datetime object: 2017-03-08 14:41:27.209260
+Kernel linear window size 31 training sets 9
+Score [ 0.74991465  0.75860009  0.75740504  0.75603927  0.74861289  0.7494665
+  0.7522834   0.75322236  0.75687212]
+Average score 0.753601811139
+[35714 12104 13368 44249]Current date and time using str method of datetime object: 2017-03-09 20:05:58.135827
+Kernel linear window size 7 training sets 3
+Score [ 0.74344164  0.75512875  0.74689847]
+Average score 0.748489623529
+[35655 12163 14142 43475]Current date and time using str method of datetime object: 2017-03-09 20:06:19.595532
+Kernel linear window size 7 training sets 5
+Score [ 0.75123293  0.7408953   0.75084175  0.74419046  0.75609409]
+Average score 0.748650904883
+[35656 12162 14142 43475]Current date and time using str method of datetime object: 2017-03-09 20:06:54.090039
+Kernel linear window size 7 training sets 7
+Score [ 0.74958508  0.74213252  0.74472182  0.7560085   0.75381755  0.74903731
+  0.74770947]
+Average score 0.749001749103
+[35656 12162 14142 43475]Current date and time using str method of datetime object: 2017-03-09 20:07:41.753778
+Kernel linear window size 7 training sets 9
+Score [ 0.74624445  0.7527102   0.73324797  0.7451131   0.75535638  0.7626974
+  0.73435766  0.76192915  0.74594502]
+Average score 0.748622371135
+[35656 12162 14142 43475]Current date and time using str method of datetime object: 2017-03-09 20:08:43.051730
+Kernel linear window size 11 training sets 3
+Score [ 0.75024185  0.75740504  0.75082518]
+Average score 0.752824020328
+[35833 11985 13806 43811]

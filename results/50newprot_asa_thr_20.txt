@@ -1,0 +1,3 @@
+Current date and time using str method of datetime object: 2017-03-13 15:42:24.735290
+Kernel linear window size 15 training sets 5
+[6395 2261 1078 5763]

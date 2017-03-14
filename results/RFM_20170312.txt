@@ -1,0 +1,117 @@
+Current date and time using str method of datetime object: 2017-03-12 16:10:08.127128
+window size 7 n_estimators 3
+[45469  2349  2257 55360]
+Current date and time using str method of datetime object: 2017-03-12 16:10:12.147577
+window size 7 n_estimators 5
+[46377  1441  1290 56327]
+Current date and time using str method of datetime object: 2017-03-12 16:10:16.384029
+window size 7 n_estimators 7
+[46906   912   811 56806]
+Current date and time using str method of datetime object: 2017-03-12 16:10:21.252923
+window size 7 n_estimators 9
+[47161   657   548 57069]
+Current date and time using str method of datetime object: 2017-03-12 16:10:26.852063
+window size 7 n_estimators 101
+[47708   110   100 57517]
+Current date and time using str method of datetime object: 2017-03-12 16:11:05.325441
+window size 11 n_estimators 3
+[45589  2229  2253 55364]
+Current date and time using str method of datetime object: 2017-03-12 16:11:13.902017
+window size 11 n_estimators 5
+[46384  1434  1180 56437]
+Current date and time using str method of datetime object: 2017-03-12 16:11:19.881002
+window size 11 n_estimators 7
+[46955   863   781 56836]
+Current date and time using str method of datetime object: 2017-03-12 16:11:26.468278
+window size 11 n_estimators 9
+[47141   677   561 57056]
+Current date and time using str method of datetime object: 2017-03-12 16:11:35.706996
+window size 11 n_estimators 101
+[47692   126    79 57538]
+Current date and time using str method of datetime object: 2017-03-10 14:44:54.681085
+window size 15 n_estimators 3
+[45384  2434  2350 55267]
+Current date and time using str method of datetime object: 2017-03-10 14:45:08.549448
+window size 15 n_estimators 5
+[46412  1406  1234 56383]
+Current date and time using str method of datetime object: 2017-03-10 14:45:18.240834
+window size 15 n_estimators 7
+[46926   892   808 56809]
+Current date and time using str method of datetime object: 2017-03-10 14:45:29.488430
+window size 15 n_estimators 9
+[47170   648   530 57087]
+Current date and time using str method of datetime object: 2017-03-10 14:54:14.637810
+window size 15 n_estimators 11
+[47376   442   445 57172]
+Current date and time using str method of datetime object: 2017-03-10 14:54:30.725850
+window size 15 n_estimators 21
+[47616   202   187 57430]
+Current date and time using str method of datetime object: 2017-03-10 14:54:54.955026
+window size 15 n_estimators 31
+[47685   133   123 57494]
+Current date and time using str method of datetime object: 2017-03-10 14:55:27.675559
+window size 15 n_estimators 51
+[47705   113   101 57516]
+Current date and time using str method of datetime object: 2017-03-10 14:59:17.914191
+window size 15 n_estimators 101
+[47713   105    99 57518]
+Current date and time using str method of datetime object: 2017-03-12 16:12:24.549977
+window size 19 n_estimators 3
+[45357  2461  2242 55375]
+Current date and time using str method of datetime object: 2017-03-12 16:12:30.625835
+window size 19 n_estimators 5
+[46416  1402  1281 56336]
+Current date and time using str method of datetime object: 2017-03-12 16:12:37.906386
+window size 19 n_estimators 7
+[46957   861   814 56803]
+Current date and time using str method of datetime object: 2017-03-12 16:12:46.366411
+window size 19 n_estimators 9
+[47233   585   528 57089]
+Current date and time using str method of datetime object: 2017-03-12 16:12:56.222926
+window size 19 n_estimators 101
+[47703   115    88 57529]
+Current date and time using str method of datetime object: 2017-03-12 16:14:03.264407
+window size 23 n_estimators 3
+[45336  2482  2305 55312]
+Current date and time using str method of datetime object: 2017-03-12 16:14:10.239022
+window size 23 n_estimators 5
+[46433  1385  1274 56343]
+Current date and time using str method of datetime object: 2017-03-12 16:14:18.530226
+window size 23 n_estimators 7
+[46927   891   788 56829]
+Current date and time using str method of datetime object: 2017-03-12 16:14:28.380447
+window size 23 n_estimators 9
+[47198   620   524 57093]
+Current date and time using str method of datetime object: 2017-03-12 16:14:39.524322
+window size 23 n_estimators 101
+[47710   108    94 57523]
+Current date and time using str method of datetime object: 2017-03-12 16:15:54.391040
+window size 27 n_estimators 3
+[45331  2487  2354 55263]
+Current date and time using str method of datetime object: 2017-03-12 16:16:02.509368
+window size 27 n_estimators 5
+[46455  1363  1221 56396]
+Current date and time using str method of datetime object: 2017-03-12 16:16:11.904203
+window size 27 n_estimators 7
+[46932   886   757 56860]
+Current date and time using str method of datetime object: 2017-03-12 16:16:22.778080
+window size 27 n_estimators 9
+[47233   585   513 57104]
+Current date and time using str method of datetime object: 2017-03-12 16:16:35.136983
+window size 27 n_estimators 101
+[47700   118    85 57532]
+Current date and time using str method of datetime object: 2017-03-12 16:17:58.141407
+window size 31 n_estimators 3
+[45491  2327  2343 55274]
+Current date and time using str method of datetime object: 2017-03-12 16:18:07.348942
+window size 31 n_estimators 5
+[46474  1344  1250 56367]
+Current date and time using str method of datetime object: 2017-03-12 16:18:17.965583
+window size 31 n_estimators 7
+[46942   876   768 56849]
+Current date and time using str method of datetime object: 2017-03-12 16:18:30.343514
+window size 31 n_estimators 9
+[47245   573   474 57143]
+Current date and time using str method of datetime object: 2017-03-12 16:18:43.993774
+window size 31 n_estimators 101
+[47710   108    94 57523]

@@ -1,0 +1,21 @@
+Current date and time using str method of datetime object: 2017-03-13 15:53:06.251235
+Kernel linear window size 15 training sets 5
+[7349 5544  124 2480]
+Current date and time using str method of datetime object: 2017-03-13 15:36:44.622551
+Kernel linear window size 15 training sets 5
+[7061 3984  412 4040]
+Current date and time using str method of datetime object: 2017-03-13 15:41:03.149668
+Kernel linear window size 15 training sets 5
+[6745 2995  728 5029]
+Current date and time using str method of datetime object: 2017-03-13 15:42:24.735290
+Kernel linear window size 15 training sets 5
+[6395 2261 1078 5763]
+Current date and time using str method of datetime object: 2017-03-13 15:44:21.319529
+Kernel linear window size 15 training sets 5
+[5749 1426 1724 6598]
+Current date and time using str method of datetime object: 2017-03-13 15:54:08.022072
+Kernel linear window size 15 training sets 5
+[5417 1189 2056 6835]
+Current date and time using str method of datetime object: 2017-03-13 15:55:44.936431
+Kernel linear window size 15 training sets 5
+[3988  549 3485 7475]

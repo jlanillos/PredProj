@@ -1,0 +1,33 @@
+Current date and time using str method of datetime object: 2017-03-09 20:13:06.033127
+Kernel poly window size 15 training sets 7 regularization parameter 0.005
+[41394  6424 13283 44334]
+Current date and time using str method of datetime object: 2017-03-09 22:20:49.714496
+Kernel poly window size 15 training sets 7 regularization parameter 0.07
+[43932  3886  7776 49841]
+Current date and time using str method of datetime object: 2017-03-10 01:58:33.101050
+Kernel poly window size 15 training sets 7 regularization parameter 0.5
+[45543  2275  4965 52652]
+Current date and time using str method of datetime object: 2017-03-11 01:35:58.071049
+Kernel rbf window size 15 training sets 7 regularization parameter 0.005
+[35566 12252 16509 41108]
+Current date and time using str method of datetime object: 2017-03-11 05:45:10.029991
+Kernel rbf window size 15 training sets 7 regularization parameter 0.07
+[39624  8194 16669 40948]
+Current date and time using str method of datetime object: 2017-03-11 07:51:18.914955
+Kernel rbf window size 15 training sets 7 regularization parameter 0.5
+[40852  6966 12091 45526]
+Current date and time using str method of datetime object: 2017-03-13 12:25:42.032452
+Kernel linear window size 15 training sets 7 regularization parameter 0.005
+[35555 12263 13665 43952]
+Current date and time using str method of datetime object: 2017-03-13 12:26:46.938105
+Kernel linear window size 15 training sets 7 regularization parameter 0.005
+[35555 12263 13665 43952]
+Current date and time using str method of datetime object: 2017-03-13 12:26:53.830320
+Kernel linear window size 15 training sets 7 regularization parameter 0.07
+[35681 12137 13679 43938]
+Current date and time using str method of datetime object: 2017-03-13 12:27:02.505875
+Kernel linear window size 15 training sets 7 regularization parameter 0.5
+[35719 12099 13667 43950]
+Current date and time using str method of datetime object: 2017-03-13 12:27:25.304994
+Kernel linear window size 15 training sets 7 regularization parameter 1
+[35727 12091 13659 43958]

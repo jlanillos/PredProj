@@ -1,0 +1,5 @@
+Current date and time using str method of datetime object: 2017-03-12 23:07:08.912419
+Kernel linear window size 15 training sets 7
+Score [ 0.68366195  0.68868676  0.6926039   0.69313504  0.69207277  0.690081
+  0.68224671]
+Average score 0.68892687689
