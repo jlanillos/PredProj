@@ -14,19 +14,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
 
-#main_path = '/home/u2188/PredProj' #Main path to the project directory
-main_path = '/home/jlanillos/PredProj' #Main path to the project directory
+main_path = '/home/u2188/PredProj' #Main path to the project directory
+#main_path = '/home/jlanillos/PredProj' #Main path to the project directory
 data_path = os.path.join(main_path, 'data','datasets')
-#dataset_file = 'example_oneseq.fasta'
+
 dataset_file = 'buried-exposed.3line.txt'
 pssm_data_folder = os.path.join(main_path, 'data', 'psi_blast')
 bin_path = os.path.join(main_path, 'bin')
 
 
 
-#save_file = os.path.join(main_path, 'results','psiblast_parametricAnal_ws_Linearkern_cv_20170306.txt')
+save_file = os.path.join(main_path, 'results','psiblast_parametricAnal_ws_Linearkern_cv_20170306.txt')
 
-save_file = os.path.join(main_path, 'results','caca20170307.txt')
 
 functions_path = os.path.join(main_path, 'bin','functions')
 #cd '/home/jlanillos/PredProj/bin/functions'
@@ -37,7 +36,7 @@ functions_path = os.path.join(main_path, 'bin','functions')
 
 ws_range = [7,11,15,19,23,27,31] #window size of the vectors
 kern_range = ['linear'] #['linear', 'poly', 'rbf', 'sigmoid'] #Choose the kernel function for SVM
-cv_range = [7]#[3,5,7,9] #number of training datasets (plus the test dataset) for cross-validation
+cv_range = [3,5,7,9] #number of training datasets (plus the test dataset) for cross-validation
 
 
 

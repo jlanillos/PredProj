@@ -1,0 +1,24 @@
+The directory ~/PredProj/bin/functions contains all the necessary functions to run SVM and some useful scripts to prepare the data, read results...
+
+In order to run SVM, it is necessary to open one of the files called like 'main_script...', specify the parameters, folder and paths as required, save and and run python. There are several files called 'main_script...' because they have been used for different steps of the project:
+
+
+main_script.py associated to runSVM.py: It runs SVM without psiblast information. The other files similarly called run pretty similar but with different purposes and including Evolutionary information from psiblast.
+
+main_script_50proteins.py associated to runSVM_50prot.py
+
+main_script_imp_perfo_GRIDSEARCH.py associated to runSVM_imp_perfo_GRIDSEARCH.py 
+
+main_script_imp_perfo.py associated to runSVM_imp_perfo.py           
+
+main_script_psiblast.py associated to runSVM_psiblast.py 
+
+main_script_RMF.py associated to runRFC.py: RANDOMFOREST calculation
+
+
+The folder Utilities contains some scripts to read the results and get them to plot, analyze them...
+It also contains the bash file that runs psiblast to extract the evolutionary information from each sequence.
+
+                 
+
+

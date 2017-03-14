@@ -14,10 +14,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
 
-#main_path = '/home/u2188/PredProj' #Main path to the project directory
-main_path = '/home/jlanillos/PredProj' #Main path to the project directory
+main_path = '/home/u2188/PredProj' #Main path to the project directory
+#main_path = '/home/jlanillos/PredProj' #Main path to the project directory
 data_path = os.path.join(main_path, 'data','datasets')
-#dataset_file = 'example_oneseq.fasta'
+
 dataset_file = 'buried-exposed.3line.txt'
 pssm_data_folder = os.path.join(main_path, 'data', 'psi_blast')
 bin_path = os.path.join(main_path, 'bin')
@@ -29,7 +29,7 @@ bin_path = os.path.join(main_path, 'bin')
 save_file = os.path.join(main_path, 'results','parametricAnal_improve_perfo_gamma_C_20170313.txt')
 
 functions_path = os.path.join(main_path, 'bin','functions')
-#cd '/home/jlanillos/PredProj/bin/functions'
+
 
 
 

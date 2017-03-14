@@ -5,41 +5,36 @@ from sklearn.svm import LinearSVC
 from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score
 import math
-
 import pickle	
 
 def runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv,C,save_model_path):
-	# Read FASTA
-	
+
+	#Read the FASTA that contains all proteins
 	filename = os.path.join(data_path,dataset_file)
 	title_list, seq_list, feature_list = read_fasta(filename)
 
 
-	# Dictionaries to use them and code aminoacids into vectors. Outputs: aa2vector feature_dict(Name of the function: dictionaries). No inputs required
-	path2functions = os.path.join(bin_path,'functions')
-	#aa_dict, feature_dict, aa2vect_dictionary = dictionaries()
 
 	# Arrange data as input for sklearn
-
 	wordscode, featurescode = prot2vect(seq_list, feature_list, ws)
+
+#RUNNING SVM
+
 	X = wordscode
 	y = featurescode
-	# Create training and test datasets and perform cross-validation
 
-	#cv is the number of sets are created for the cross validation.
-
-	#class sklearn.svm.SVC(C=1.0, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
 
 	clf = SVC(C=C, kernel=kern, degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
 	#clf = svm.LinearSVC(C=1)
 	clf.fit(X, y)
 	
+	# Attempt to save the created model
 	save_model_filename = kern+'_'+str(ws)+'_'+str(C)+'_'+str(cv)+'.sav'
 	pickle.dump(clf, open(filename, 'wb'))
 
 
 	y_pred = clf.predict(X)
-
+	# Cross-validation scores. cv is the number of training datasets you choose in the main_script
 	if cv == 3:
 		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
 	if cv == 5:
@@ -48,23 +43,19 @@ def runSVM(main_path,data_path,bin_path,dataset_file,ws,kern,cv,C,save_model_pat
 		scores = cross_val_score(clf, wordscode, featurescode, cv = 7)
 	if cv == 9:
 		scores = cross_val_score(clf, wordscode, featurescode, cv = 9)
-	#print(scores)
-	#print('The mean score after cross-validation is: ', sum(scores)/cv)
-###################################3
+
 	return scores,y,y_pred
-	# Built SVM model
 
 
-	# This function takes a protein sequence as an input and translates it into its code for sklearn
+
+
+# This function takes the list of proteins as an input and translates it into its code for sklearn. It returns 'wordscode, featurescode' which are the X and y inputs to SVM
 
 def prot2vect(seq_list, feature_list,ws):
 
-#feature <aa> <value> <aa> <value> ... <aa value> 
-#First column = feature (for example 0 = H = HELIX ; 1 = E = BETA ; 2 = C = COIL)
-#<aa> = amino-acid = <aa> ( A = 1; G = 2 and so on)
-#<value> = 0 or 1 (this is valid when you have single sequence)
 
-	aa_dict, feature_dict, aa2vect_dictionary = dictionaries()
+
+	aa_dict, feature_dict, aa2vect_dictionary = dictionaries() # This dictionary does not uses the evolutionary data from pssm files.
 	cont = 0
 	seq2code = list()
 	words = list()
@@ -72,6 +63,7 @@ def prot2vect(seq_list, feature_list,ws):
 	wordscode_aux = list()
 	wordscode = list()
 	featurescode = list()
+
 	for seq in seq_list:
 		ext = 'o' * int((ws-1)/2)
 		extseq = ext + seq + ext #Extended sequence with 'o' to deal with the ws issue
@@ -86,6 +78,7 @@ def prot2vect(seq_list, feature_list,ws):
 		for j in i: #i is a word with the given window size that now is going to be translated into code
 			w = w + (aa2vect_dictionary[j]) #optimization, this dictionary should have integers better
 		wordscode_aux.append(w)
+
 	for i in wordscode_aux:
 		t_aux = list()
 		for j in i:
@@ -98,9 +91,7 @@ def prot2vect(seq_list, feature_list,ws):
 
 
 
-
-
-#Create dictionaries for aminoacid names
+# CREATE THE DICTIONARY FOR EACH AMINO ACID NAME (No evolutionary data)
 def dictionaries():
 
 	import numpy as np
@@ -126,13 +117,13 @@ def dictionaries():
 
 	return aa_dict, feature_dict, aa2vect_dictionary
 
-# First, I made a search of the present aminoacids in all my sequences at the dataset in order to create the dictionary above:
-# {'A', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'N', 'P', 'Q', 'R', 'T', 'V', 'W', 'Y'}
+	
 
 
 # EXTRACT THE FEATURE
-# working with filename = '~/PredProj/data/datasets/buried-exposed.3line.txt'
+
 #Read FASTA file (database) and return separatedly as lists the ids, the sequence and feature
+# This FASTA reader is prepared for reading the database used in this project
 def read_fasta(filename):
 	f = open(filename,'r')
 	content = f.readlines()

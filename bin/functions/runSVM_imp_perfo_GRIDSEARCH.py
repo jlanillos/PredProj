@@ -1,8 +1,7 @@
 # Script that runs the necessary functions for SVM WITH EVOLUTIONARY DATA
 
-# Script that runs every step necessary to perform SVM and SVM itself
 
-def runSVM(main_path,data_path,bin_path,dataset_file,data_50proteins,pssm_data_folder,pssm_data_folder_50new,ws,kern,cv,C):
+def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws):
 
 	
 	import os
@@ -15,15 +14,12 @@ def runSVM(main_path,data_path,bin_path,dataset_file,data_50proteins,pssm_data_f
 	from sklearn.model_selection import train_test_split
 	from sklearn.metrics import classification_report
 
-
-
 	#Read the FASTA that contains all proteins
 	filename = data_path + '/' + dataset_file
 	title_list, seq_list, feature_list = read_fasta(filename)
 
 
 	# Arrange data as input for sklearn
-	
 	wordscode, featurescode = prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder)
 
 
@@ -31,56 +27,18 @@ def runSVM(main_path,data_path,bin_path,dataset_file,data_50proteins,pssm_data_f
 
 	X = wordscode
 	y = featurescode
-	del wordscode
-	del featurescode
-
-	# The input for prediction now is coming from the 50 new proteins (X_50prot)
-
-	filename = data_path + '/' + data_50proteins
-	title_list, seq_list, feature_list = read_fasta(filename)
-	wordscode, featurescode = prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder_50new)
-	X_50prot = wordscode
-	y_50prot = featurescode
-	
-# These kernels and paramters has been chosen specifically for this project. Customize them as desired
-	if kern == 'poly':
-		clf = SVC(C=C, kernel=kern, degree=2, gamma= 1.0, coef0=1.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight='balanced', verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
-	
-		clf.fit(X, y)
-		y_pred = clf.predict(X_50prot)
-
-	elif kern == 'rbf':
-
-		clf = SVC(C=C, kernel=kern, degree=3, gamma=0.1, coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight='balanced', verbose=False, max_iter=-1, decision_function_shape=None, random_state=None)
-
-	
-		clf.fit(X, y)
-		y_pred = clf.predict(X_50prot)
-
-	elif kern == 'linear':
-
-		clf = LinearSVC(C=1)
-
-		clf.fit(X, y)
-		y_pred = clf.predict(X_50prot)
 
 
+	from sklearn import svm
+	from sklearn.model_selection import GridSearchCV
+	parameters = {'kernel':('linear','rbf','poly'), 'C':[0.01,0.1,1,10,100]}
+	svr = svm.SVC()
+	clf = GridSearchCV(svr, parameters)
+	clf.fit(X, y)
 
-#X_train, X_test, y_train, y_test = train_test_split(X, structvectorlist, test_size=0.20, random_state=42)els=labels).ravel()
+	y_pred = clf.predict(X)
 
-
-#	if cv == 3:
-#		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
-#	if cv == 5:
-#		scores = cross_val_score(clf, wordscode, featurescode, cv = 5)
-#	if cv == 7:
-#		scores = cross_val_score(clf, wordscode, featurescode, cv = 7)
-#	if cv == 9:
-#		scores = cross_val_score(clf, wordscode, featurescode, cv = 9)
-	#print(scores)
-	#print('The mean score after cross-validation is: ', sum(scores)/cv)
-###################################
-	return y_50prot,y_pred
+	return y,y_pred,clf
 
 
 # This function takes the list of proteins as an input and translates it into its code for sklearn. It returns 'wordscode, featurescode' which are the X and y inputs to SVM
@@ -114,7 +72,7 @@ def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 		cont = cont + 1
 
 
- # This list has the sequences given by position (the position of each amino acid has replaced the amino acid, so that, I have made sequences with numbers instead)
+# This list has the sequences given by position (the position of each amino acid has replaced the amino acid, so that, I have made sequences with numbers instead)
 	cont = 0
 # This step takes each sequence (in numbers: seqnum). I create the dictionary according to each sequence by using the specific pssm file.
 
@@ -124,12 +82,13 @@ def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 
 		feature_dict, aapos2vect_dict = dictionaries_psiblast(pssm_data_folder, seqname)
 
-		# For each sequence, make its words according to window size
+		# For each sequence, make its words accordingly to window size
 
 		word = seq_num_dict[seqname]
 		feature = features_dict[seqname]
 
 		word_ws_list = list()
+
 		for i in range(0,(len(word)-ws+1)): #create words with the given window size 'ABC'
 			word_ws_list.append(word[i:i+ws])
 			features.append(feature[i])
@@ -140,17 +99,15 @@ def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 
 		for k in word_ws_list:
 			w = list()
-			for j in k: #j is a word with the given window size that now is going to be translated into code
+			for j in k: #j is a word with the given window size that now is going to be translated into frequencies vector
 				w = w + (aapos2vect_dict[j]) #optimization, this dictionary should have integers better
 				
 			wordscode.append(w)
-
 
 	for i in features:
 		featurescode.append(feature_dict[i])
 	
 	return wordscode, featurescode
-
 
 
 #CREATE DICTIONARIES FOR EACH AMINO ACID POSITION:
@@ -170,7 +127,7 @@ def dictionaries_psiblast(pssm_data_folder, seqID):
 	aapos2vect_dict[0] = [0.0]*20 #include the filler
 
 	
-	for i in range(3,len(content)-6): # This range due to the pssm file characteristics. this loop gets the frequencies vectors of each aa position. It is sort of the parser.
+	for i in range(3,len(content)-6): # This range due to the pssm file characteristics. This loop reads the frequencies vectors of each aa position.
 		line = content[i].split()
 		aaposition = line[0]
 
@@ -180,7 +137,7 @@ def dictionaries_psiblast(pssm_data_folder, seqID):
 		strvector = [j/100 for j in strvector]
 
 		aapos2vect_dict[int(aaposition)] = strvector
-
+	
 
 	feature_dict = {} # Dictionary to convert my feature into 0s and 1s
 	feature_dict['b'] = 1
@@ -188,7 +145,6 @@ def dictionaries_psiblast(pssm_data_folder, seqID):
 
 
 	return feature_dict, aapos2vect_dict
-
 
 
 # EXTRACT THE FEATURE
@@ -210,10 +166,11 @@ def read_fasta(filename):
 	for i in content:
 		if '>' in i:
 			title_list.append(i[1:])
-		if i.isupper() and not '>' in i:
+		if i.isupper():
 			seq_list.append(i)
 		if i.islower() and '>' not in i:
 			feature_list.append(i)
-
+			
+			
 	f.close()
 	return title_list, seq_list, feature_list
