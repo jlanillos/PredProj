@@ -1,10 +1,12 @@
-# Script that runs the necessary functions for RANDOME FOREST WITH EVOLUTIONARY DATA
+# Script that runs the necessary functions for SVM WITH EVOLUTIONARY DATA
 
+# Script that runs every step necessary to perform SVM and SVM itself
 
 
 def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,cv):
+	# Read FASTA
 	
-	import os
+	#import os
 	import datetime
 	from sklearn.ensemble import RandomForestClassifier
 	from sklearn.model_selection import cross_val_score
@@ -15,14 +17,23 @@ def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,cv):
 
 
 
-	#Read the FASTA that contains all proteins
+
 	filename = data_path + '/' + dataset_file
 	title_list, seq_list, feature_list = read_fasta(filename)
 
 
+	# Dictionaries to use them and code aminoacids into vectors. Outputs: aa2vector feature_dict(Name of the function: dictionaries). No inputs required
+	path2functions = bin_path  + '/' + 'functions'
+	#aa_dict, feature_dict, aa2vect_dictionary = dictionaries_psiblast()
+
 	# Arrange data as input for sklearn
 
 	wordscode, featurescode = prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder)
+
+
+	# Create training and test datasets and perform cross-validation
+
+	#cv is the number of sets are created for the cross validation.
 
 
 #RUNNING SVM
@@ -32,15 +43,29 @@ def runSVM(main_path,data_path,bin_path,dataset_file,pssm_data_folder,ws,cv):
 
 	clf = RandomForestClassifier(n_estimators = cv)
 
-	clf.fit(X, y)
-	y_pred = clf.predict(X)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
+	clf.fit(X_train, y_train)
+	y_pred = clf.predict(X_test)
 
 
-	return y,y_pred
 
 
 
-# This function takes the list of proteins as an input and translates it into its code for sklearn. It returns 'wordscode, featurescode' which are the X and y inputs to SVM
+#	if cv == 3:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 3)
+#	if cv == 5:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 5)
+#	if cv == 7:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 7)
+#	if cv == 9:
+#		scores = cross_val_score(clf, wordscode, featurescode, cv = 9)
+	#print(scores)
+	#print('The mean score after cross-validation is: ', sum(scores)/cv)
+###################################
+	return y_test,y_pred
+
+
+	# This function takes the list of proteins as an input and translates it into its code for sklearn
 
 def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 
@@ -52,9 +77,10 @@ def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 	word_ws_list = list()
 
 
-	features = list() # List to append all the words with the specified window size
-	features_dict = {} # Dictionary used as intermediate data structure to play with features.
-	featurescode = list() # Final list for the features, It is the output that returns the y values for the SVM
+	features = list()
+	features_dict = {}
+	featurescode = list()
+
 
 
 	ext = [0]
@@ -79,9 +105,9 @@ def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 
 		file_path = pssm_data_folder  + '/' +  seqname + '.fasta.pssm'
 
-
+		#if os.path.exists(file_path):
 		feature_dict, aapos2vect_dict = dictionaries_psiblast(pssm_data_folder, seqname)
-
+		#print(feature_dict)
 		# For each sequence, make its words according to window size
 
 		word = seq_num_dict[seqname]
@@ -91,7 +117,7 @@ def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 		for i in range(0,(len(word)-ws+1)): #create words with the given window size 'ABC'
 			word_ws_list.append(word[i:i+ws])
 			features.append(feature[i])
-
+		#print(len(word_ws_list))
 
 # Up to here, the list with all the words with ws for one sequence has been done. Now, it comes the last step where we translate that word into its aa frequencies
 
@@ -103,6 +129,7 @@ def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 				
 			wordscode.append(w)
 
+		#print(len(features))
 
 	for i in features:
 		featurescode.append(feature_dict[i])
@@ -113,10 +140,7 @@ def prot2vect_psiblast(title_list, seq_list, feature_list,ws,pssm_data_folder):
 
 
 
-#CREATE DICTIONARIES FOR EACH AMINO ACID POSITION:
-# This function reads the corresponding pssm data file and stores the evolutionary information of each amino acid position of a sequence into a dictionary
-# whose IDs are the position number
-
+#Create dictionaries for aminoacid names
 def dictionaries_psiblast(pssm_data_folder, seqID):
 
 	import numpy as np
@@ -143,19 +167,24 @@ def dictionaries_psiblast(pssm_data_folder, seqID):
 		aapos2vect_dict[int(aaposition)] = strvector
 
 
-	feature_dict = {} # Dictionary to convert my feature into 0s and 1s
+		#pos_dict[int(aaposition)] = aaletter
+
+	#aa_dict = {'A': 1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7, 'I':8, 'K':9, 'L':10, 'M':11, 'N':12, 'P':13, 'Q':14, 'R':15, 'S':16, 'T':17, 'V':18, 'W':19, 'X':20, 'Y':21,'o':0}	
+
+	feature_dict = {}
 	feature_dict['b'] = 1
 	feature_dict['e'] = 0
 
 
 	return feature_dict, aapos2vect_dict
+ 	#return pos_dict, feature_dict, aapos2vect_dict
+# First, I made a search of the present aminoacids in all my sequences at the dataset in order to create the dictionary above:
+# {'A', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'N', 'P', 'Q', 'R', 'T', 'V', 'W', 'Y'}
 
 
 # EXTRACT THE FEATURE
-
+# working with filename = '~/PredProj/data/datasets/buried-exposed.3line.txt'
 #Read FASTA file (database) and return separatedly as lists the ids, the sequence and feature
-# This FASTA reader is prepared for reading the database used in this project
-
 def read_fasta(filename):
 	f = open(filename,'r')
 	content = f.readlines()
@@ -178,3 +207,8 @@ def read_fasta(filename):
 			
 	f.close()
 	return title_list, seq_list, feature_list
+
+
+
+
+
